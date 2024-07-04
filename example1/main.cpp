@@ -13,7 +13,7 @@ int main()
     auto wb = xl::workbook{};
     wb.app_name = "My App";
 
-    auto& sh = wb.sheets.emplace_back("sheet1");
+    auto& sh = wb.sheets.emplace_back(xl::sheet{.name="sheet1"});
     sh.columns[2] = xl::column{.width=20};
     
     {
@@ -85,6 +85,7 @@ int main()
     xl::pack(blob, w.files);
 
     auto fn = "./testdata/t1.xlsx";
+    printf("writing: %s\n", fn);
     std::ofstream output_file(fn, std::ios::binary);
     if (!output_file) {
         printf("Failed to create output file\n");
